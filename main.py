@@ -2,7 +2,6 @@ import streamlit as st
 from functions import ideator, create_produce_link_url
 import json
 import os
-import sys
 from datetime import datetime
 from supabase import create_client, Client
 
@@ -19,64 +18,79 @@ def main():
     # Create a title for the chat interface
     st.title("Full Harvest Bot (named Harvey)")
     st.write("To test, first select some fields then click the button below.")
-  
+   
+    
+    name_of_buyer = st.text_input('Name of buyer', value = 'Buyer-Test')
+    email_of_buyer = st.text_input('Email of buyer', value = 'uzairanjum@hellogepeto.com')
+    phone_number_of_buyer = st.text_input('Phone number of buyer',value = '+16469802405')
+    supplier_name = st.text_input('Supplier name',value = 'Supplier-Test')
+    supplier_address = st.text_input(' Supplier address',value = '')
+    ple_delivered = st.text_input('Priority Listing Email Delivered',value = '')
+    ple_open_count = st.text_input('Priority Listing Email Opened Count',value = '')
+    ple_clicked_count = st.text_input('Priority Listing Email Clicked Count',value = '')
+    ple_produced_type = st.text_input('Produce type in the PLE',value = '')
+    ple_supplier_available_date = st.text_input('Produce available date from the supplier in the PLE',value = '')
+    ple_supplier_growing_method = st.text_input('Produce growing method from the supplier in the PLE',value = '')
+    ple_supplier_product_price = st.text_input('Produce price from the supplier in the PLE',value = '')
+    ple_supplier_packing_type = st.text_input('Produce packing type from the supplier in the PLE',value = '')
+    ple_supplier_product_volume = st.text_input('Produce volume from the supplier in the PLE',value = '')
+    produce_priority_listing_link= st.text_input('Produce priority listing link for purchase',value = '')
+    full_harvest_account = st.text_input('Full Harvest Account executive email tied to the buyer',value = '')
+    priority_lisitng_purchase = st.text_input('Priority Listing Purchase Status',value = '')
 
-    name = st.text_input('Bot Name', value = 'Harvey')
-    booking_link = st.text_input('Booking Link', value = 'fullharvestbookinglink.com')
-    buyer_or_supplier = st.selectbox('Buyer or Supplier', ['Buyer', 'Supplier'], index = 0)
-    lead_first_name = st.text_input('Lead First Name', value = 'John')
-    buyer_company_name = st.text_input('Company Name', value = 'Appleseed Co')
-
-    options = ['Tomatoes', 'Blueberries', 'Garlic', 'Bananas', 'Onions']
-    selection = st.multiselect("Choose your options", options)
-
-    if len(selection) == 0:
-        selected_commodities = ''
-    elif len(selection) == 1:
-        selected_commodities = selection[0]
-    elif len(selection) == 2:
-        selected_commodities = f"{selection[0]} and {selection[1]}"
-    else:
-        selected_commodities = ', '.join(selection[:-1]) + f", and {selection[-1]}"
-
-
-    need_availability = st.selectbox('Need or Availability', ['weekly','monthly', 'quarterly', 'yearly'], index = 1)
-    growing_method = st.selectbox('Growing Method', ['Organic', 'Conventional', 'Does not matter'], index = 1)
-    search_produce_link = "https://app.fullharvest.com/listings/?anonymous=true"
-    bid_request_link = 'https://app.fullharvest.com/bid_requests/new/specs'
 
     lead_dict_info = {
-        'name': name,
-        'booking_link': booking_link,
-        'buyer_or_supplier':  buyer_or_supplier,
-        'lead_first_name': lead_first_name,
-        'buyer_company_name': buyer_company_name,
-        'selected_commodities': selected_commodities,
-        'need_availability': need_availability,
-        'growing_method': growing_method
-
+        'name_of_buyer' : name_of_buyer,
+        'email_of_buyer' : email_of_buyer,
+        'phone_number_of_buyer' : phone_number_of_buyer, 
+        'supplier_name' : supplier_name,
+        'supplier_address' : supplier_address,
+        'ple_delivered' : ple_delivered,
+        'ple_open_count' : ple_open_count,
+        'ple_clicked_count' : ple_clicked_count,
+        'ple_produced_type' : ple_produced_type,
+        'ple_supplier_available_date' : ple_supplier_available_date,
+        'ple_supplier_growing_method' : ple_supplier_growing_method,
+        'ple_supplier_product_price' : ple_supplier_product_price,
+        'ple_supplier_packing_type' : ple_supplier_packing_type,
+        'ple_supplier_product_volume' : ple_supplier_product_volume,
+        'produce_priority_listing_link': produce_priority_listing_link,
+        'full_harvest_account' : full_harvest_account,
+        'priority_lisitng_purchase' : priority_lisitng_purchase
+ 
     }
-
-    
+    name = 'persistent_harvey'
     if st.button('Click to Start or Restart'):
-        if buyer_or_supplier == "Buyer":
-            bot = 'harvey_buyer'
-        if buyer_or_supplier == "Supplier":
-            bot = 'harvey_supplier'
-            
-        print(bot)
-        data, count = supabase.table("bots_dev").select("*").eq("id", bot).execute()   
+        data, count = supabase.table("bots_dev").select("*").eq("id", 'persistent_harvey').execute()   
         bot_info = data[1][0]
         
-        system_prompt = bot_info['system_prompt']
-        if len(selection) > 0:
-            initial_text = bot_info['initial_text']
-        else:
-            initial_text = "Hey, this is {name} from Full Harvest. Just saw you signed up on our platform. Am I speaking with {lead_first_name}?"
+        system_prompt = bot_info['system_prompt']        
+        initial_text = "Hey, this is {name} from Full Harvest. Just saw you signed up on our platform. Am I speaking with {name_of_buyer}?"
 
-        system_prompt = system_prompt.format(bid_request_link = bid_request_link, search_produce_link = search_produce_link, need_availability = need_availability, growing_method = growing_method, buyer_or_supplier = buyer_or_supplier, selected_commodities = selected_commodities, lead_first_name=lead_first_name, booking_link = booking_link, name=name, buyer_company_name = buyer_company_name)
-
-        initial_text = initial_text.format(lead_first_name = lead_first_name, name=name, selected_commodities = selected_commodities, need_availability = need_availability)
+        system_prompt = system_prompt.format(
+                                            name=name, 
+                                            name_of_buyer = name_of_buyer,
+                                            email_of_buyer = email_of_buyer,
+                                            phone_number_of_buyer = phone_number_of_buyer,
+                                            supplier_name = supplier_name,
+                                            supplier_address = supplier_address,
+                                            ple_delivered = ple_delivered,
+                                            ple_open_count = ple_open_count,
+                                            ple_clicked_count = ple_clicked_count,
+                                            ple_produced_type = ple_produced_type,
+                                            ple_supplier_available_date = ple_supplier_available_date,
+                                            ple_supplier_growing_method = ple_supplier_growing_method,
+                                            ple_supplier_product_price = ple_supplier_product_price,
+                                            ple_supplier_packing_type = ple_supplier_packing_type,
+                                            ple_supplier_product_volume = ple_supplier_product_volume,
+                                            produce_priority_listing_link= produce_priority_listing_link,
+                                            full_harvest_account = full_harvest_account,
+                                            priority_lisitng_purchase = priority_lisitng_purchase,
+                                            booking_link = 'booking_link_data',
+                                            selected_commodities = "",
+                                            bid_request_link= ""
+        )
+        initial_text = initial_text.format(name_of_buyer = name_of_buyer, name=name)
 
         st.write(initial_text)
 

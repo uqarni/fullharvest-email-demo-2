@@ -20,7 +20,6 @@ def find_txt_examples(query, k=8):
     for doc in docs:
        print(len(str(doc)))
     embeddings = OpenAIEmbeddings()
-
     db = FAISS.from_documents(docs, embeddings)
     docs = db.similarity_search(query, k=k)
 
@@ -41,7 +40,6 @@ def ideator(messages, lead_dict_info):
 
     #perform similarity search
     examples = find_txt_examples(new_message, k=5)
-    
     prompt = prompt + examples
     prompt = prompt.format(**lead_dict_info)
     #print('inbound message: ' + str(messages[-1]))
