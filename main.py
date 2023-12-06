@@ -21,7 +21,7 @@ def main():
             We need your help in identifying how Harvey can correspond better. To do that, we need example conversations.
 
             Here’s a video on how to give feedback to Harvey.
-            [Loom.com](https://www.loom.com/)
+            [Loom.com](https://www.loom.com/share/5577b742cecd4d82939697e17bc7c617)
 
             Here’s the google doc you can leave your feedback in:
             [Feedback Google Doc](https://docs.google.com/document/d/147Bzbi1zbcdN4kmuv2enOF6RcROeLpCI5v12fx2oJ_w/edit)
