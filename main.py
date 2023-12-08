@@ -95,15 +95,12 @@ def main():
  
     }
     if st.button('Click to Start or Restart'):
-        data, count = supabase.table("bots_dev").select("*").eq("id", 'persistent_harvey').execute()   
+        data, count = supabase.table("bots_dev").select("*").eq("id", 'outbound_harvey').execute() 
+
         bot_info = data[1][0]
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
         initial_text =initial_text.format(name=name, selected_commodities =selected_commodities)
-
-
-       
-
         system_prompt = system_prompt.format(
                                             name=name, 
                                             buyer_first_name =buyer_first_name,
@@ -120,7 +117,6 @@ def main():
                                             volume =volume,
                                             priority_listing_link=priority_listing_link
         )
-        initial_text = initial_text.format(buyer_first_name = buyer_first_name, name=name)
 
         st.write(initial_text)
 
