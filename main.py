@@ -33,23 +33,6 @@ def main():
     st.write(message)
    
     
-    # name_of_buyer = st.text_input('Name of buyer', value = 'Buyer-Test')
-    # email_of_buyer = st.text_input('Email of buyer', value = 'uzairanjum@hellogepeto.com')
-    # phone_number_of_buyer = st.text_input('Phone number of buyer',value = '+16469802405')
-    # supplier_name = st.text_input('Supplier name',value = 'Supplier-Test')
-    # supplier_address = st.text_input(' Supplier address',value = '')
-    # ple_delivered = st.text_input('Priority Listing Email Delivered',value = '')
-    # ple_open_count = st.text_input('Priority Listing Email Opened Count',value = '')
-    # ple_clicked_count = st.text_input('Priority Listing Email Clicked Count',value = '')
-    # ple_produced_type = st.text_input('Produce type in the PLE',value = '')
-    # ple_supplier_available_date = st.text_input('Produce available date from the supplier in the PLE',value = '')
-    # ple_supplier_growing_method = st.text_input('Produce growing method from the supplier in the PLE',value = '')
-    # ple_supplier_product_price = st.text_input('Produce price from the supplier in the PLE',value = '')
-    # ple_supplier_packing_type = st.text_input('Produce packing type from the supplier in the PLE',value = '')
-    # ple_supplier_product_volume = st.text_input('Produce volume from the supplier in the PLE',value = '')
-    # produce_priority_listing_link= st.text_input('Produce priority listing link for purchase',value = '')
-    # full_harvest_account = st.text_input('Full Harvest Account executive email tied to the buyer',value = '')
-    # priority_lisitng_purchase = st.text_input('Priority Listing Purchase Status',value = '')
     name = 'Harvey'
     buyer_first_name = st.text_input('Buyer first name', value = 'John')
     buyer_company_name = st.text_input('Buyer company name:', value = ' Fresh Vegetables Buyers, Inc.')
@@ -66,32 +49,22 @@ def main():
     priority_listing_link= st.text_input('Priority Listing Direct Link:',value = 'fullharvestplelink.com')
 
 
-    # options = ['Tomatoes', 'Blueberries', 'Garlic', 'Bananas', 'Onions']
-    # selection = st.multiselect("Choose your options", options)
-
-    # if len(selection) == 0:
-    #     selected_commodities = ''
-    # elif len(selection) == 1:
-    #     selected_commodities = selection[0]
-    # elif len(selection) == 2:
-    #     selected_commodities = f"{selection[0]} and {selection[1]}"
-    # else:
-    #     selected_commodities = ', '.join(selection[:-1]) + f", and {selection[-1]}"
 
     lead_dict_info = {
-        buyer_first_name :buyer_first_name,
-        buyer_company_name :buyer_company_name,
-        booking_link :booking_link,
-        email_buyer :email_buyer,
-        supplier_name :supplier_name,
-        supplier_address :supplier_address,
-        selected_commodities :selected_commodities,
-        growing_method :growing_method,
-        available_date :available_date,
-        price :price,
-        packing_type :packing_type,
-        volume :volume,
-        priority_listing_link:priority_listing_link,
+        "name" : 'Harvey',
+        "buyer_first_name" :buyer_first_name,
+        "buyer_company_name" :buyer_company_name,
+        "booking_link" :booking_link,
+        "email_buyer" :email_buyer,
+        "supplier_name" :supplier_name,
+        "supplier_address" :supplier_address,
+        "selected_commodities" :selected_commodities,
+        "growing_method" :growing_method,
+        "available_date" :available_date,
+        "price" :price,
+        "packing_type" :packing_type,
+        "volume" :volume,
+        "priority_listing_link":priority_listing_link,
  
     }
     if st.button('Click to Start or Restart'):
@@ -101,22 +74,7 @@ def main():
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
         initial_text =initial_text.format(name=name, selected_commodities =selected_commodities)
-        system_prompt = system_prompt.format(
-                                            name=name, 
-                                            buyer_first_name =buyer_first_name,
-                                            buyer_company_name =buyer_company_name,
-                                            booking_link =booking_link,
-                                            email_buyer =email_buyer,
-                                            supplier_name =supplier_name,
-                                            supplier_address =supplier_address,
-                                            selected_commodities =selected_commodities,
-                                            growing_method =growing_method,
-                                            available_date =available_date,
-                                            price =price,
-                                            packing_type =packing_type,
-                                            volume =volume,
-                                            priority_listing_link=priority_listing_link
-        )
+        system_prompt = system_prompt.format(**lead_dict_info)
 
         st.write(initial_text)
 
