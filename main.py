@@ -34,47 +34,69 @@ def main():
    
     
     name = 'Harvey'
-    buyer_first_name = st.text_input('Buyer first name', value = 'John')
-    buyer_company_name = st.text_input('Buyer company name:', value = ' Fresh Vegetables Buyers, Inc.')
-    booking_link = st.text_input('Meeting Booking Link',value = 'fullharvestbookinglink.com')
-    email_buyer = st.text_input('Email of buyer',value = 'john@freshveggies.com')
-    supplier_name = st.text_input('Supplier name',value = 'Appleseed Farms')
-    supplier_address = st.text_input('Supplier address',value = '555 Springfield Road, Boston, MA')
-    selected_commodities = st.text_input('Produce type',value = 'Spaghetti Squash')
-    growing_method = st.text_input('Growing Method',value = 'Organic')
-    available_date = st.text_input('Available Date',value = 'December 1st, 2023')
-    price = st.text_input('Price per lb',value = '$1')
-    packing_type = st.text_input('Packing type',value = 'Bin')
-    volume = st.text_input('Available volume',value = '575 lbs')
-    priority_listing_link= st.text_input('Priority Listing Direct Link:',value = 'fullharvestplelink.com')
+    name_of_buyer = st.text_input('Name of buyer', value = 'John')
+    email_of_buyer = st.text_input('Email of buyer', value = 'john@freshveggies.com')
+    # buyer_company_name = st.text_input('Buyer company name', value = ' Fresh Vegetables Buyers, Inc.')
+    priority_listing_email_delivered = st.text_input('Priority Listing Email Delivered ',value = '10')
+    priority_listing_email_opened_count = st.text_input('Priority Listing Email Opened Count',value = '4')
+    priority_listing_email_clicked_count = st.text_input('Priority Listing Email Clicked Count ',value = '6')
+    produce_commodity_in_the_ple = st.text_input('Produce commodity in the PLE',value = 'Apple')
+    produce_variety_in_the_ple = st.text_input('Produce variety in the PLE',value = 'fuji')
+    produce_pack_type_from_the_supplier_in_the_ple = st.text_input('Produce pack type from the supplier in the PLE',value = 'carton')
+    produce_cost_per_pack_in_the_ple = st.text_input('Produce cost per pack in the PLE',value = '12')
+    price_per_carton = st.text_input('Price per carton',value = '48')
+    produce_total_available_volume_from_the_supplier_in_the_ple = st.text_input('Produce total available volume from the supplier in the PLE',value = '4800')
+    produce_available_date_from_the_supplier_in_the_ple = st.text_input('Produce available date from the supplier in the PLE',value = 'December 1st, 2023')
+    produce_growing_method_from_the_supplier_in_the_ple= st.text_input('Produce growing method from the supplier in the PLE',value = 'Organic')
+    produce_price_from_the_supplier_in_the_ple = st.text_input('Produce price from the supplier in the PLE' , value= '10')
+    produce_priority_listing_link_for_purchase = st.text_input('Produce priority listing link for purchase',value = 'fullharvestplelink.com')
+    full_harvest_account_executive_email_tied_to_the_buyer = st.text_input('Full Harvest Account executive email tied to the buyer',value = 'accountexecutive@fullharvest.com')
+    priority_listing_purchase_status = st.text_input('Priority Listing Purchase Status',value = 'not purchased')
+    priority_listing_has_pictures = st.text_input('Supplier city where the produce is shipping from',value = 'no')
+    produce_grade_from_the_supplier_in_the_ple = st.text_input('Produce grade from the supplier in the PLE',value = 'A+')
+    produce_sizing_from_the_supplier_in_the_ple = st.text_input('Produce sizing from the supplier in the PLE ',value = 'Large')
+    produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple = st.text_input('Produce pack amount per pack type from the supplier',value = 4)
+    produce_description = st.text_input('Produce price per pack type from the supplier ',value = "Best Apple in the world")
+    supplier_city_where_the_produce_is_shipping_from = st.text_input('Supplier city where the produce is shipping from',value = "Denver, CO")
 
+    api_data= {
+            "name" : name,
+            "name_of_buyer": name_of_buyer,
+            "email_of_buyer": email_of_buyer,
+            "phone_number_of_buyer":  "+13372219750",
+            "booking_link" : "accountexecutive_bookinglink.com",
+            "priority_listing_email_delivered": priority_listing_email_delivered,
+            "priority_listing_email_opened_count": priority_listing_email_opened_count,
+            "priority_listing_email_clicked_count": priority_listing_email_clicked_count,
+            "produce_commodity_in_the_ple": produce_commodity_in_the_ple,
+            "produce_variety_in_the_ple": produce_variety_in_the_ple,
+            "produce_pack_type_from_the_supplier_in_the_ple": produce_pack_type_from_the_supplier_in_the_ple,
+            "produce_cost_per_pack_in_the_ple": produce_cost_per_pack_in_the_ple,
+            "price_per_carton": price_per_carton,
+            "produce_total_available_volume_from_the_supplier_in_the_ple": produce_total_available_volume_from_the_supplier_in_the_ple,
+            "produce_available_date_from_the_supplier_in_the_ple": produce_available_date_from_the_supplier_in_the_ple,
+            "produce_growing_method_from_the_supplier_in_the_ple": produce_growing_method_from_the_supplier_in_the_ple,
+            "produce_price_from_the_supplier_in_the_ple": produce_price_from_the_supplier_in_the_ple,
+            "produce_priority_listing_link_for_purchase": produce_priority_listing_link_for_purchase,
+            "full_harvest_account_executive_email_tied_to_the_buyer": full_harvest_account_executive_email_tied_to_the_buyer,
+            "priority_listing_purchase_status": priority_listing_purchase_status,
+            "priority_listing_has_pictures": priority_listing_has_pictures,
+            "produce_grade_from_the_supplier_in_the_ple":produce_grade_from_the_supplier_in_the_ple,
+            "produce_sizing_from_the_supplier_in_the_ple": produce_sizing_from_the_supplier_in_the_ple,
+            "produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple": produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple,
+            "produce_description": produce_description,
+            "supplier_city_where_the_produce_is_shipping_from" :supplier_city_where_the_produce_is_shipping_from
+  
+        }
 
-
-    lead_dict_info = {
-        "name" : 'Harvey',
-        "buyer_first_name" :buyer_first_name,
-        "buyer_company_name" :buyer_company_name,
-        "booking_link" :booking_link,
-        "email_buyer" :email_buyer,
-        "supplier_name" :supplier_name,
-        "supplier_address" :supplier_address,
-        "selected_commodities" :selected_commodities,
-        "growing_method" :growing_method,
-        "available_date" :available_date,
-        "price" :price,
-        "packing_type" :packing_type,
-        "volume" :volume,
-        "priority_listing_link":priority_listing_link,
- 
-    }
     if st.button('Click to Start or Restart'):
         data, count = supabase.table("bots_dev").select("*").eq("id", 'outbound_harvey').execute() 
-
         bot_info = data[1][0]
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
-        initial_text =initial_text.format(name=name, selected_commodities =selected_commodities)
-        system_prompt = system_prompt.format(**lead_dict_info)
+        initial_text =initial_text.format(grade=api_data['produce_grade_from_the_supplier_in_the_ple'], growing_method =api_data['produce_growing_method_from_the_supplier_in_the_ple'], variety=api_data['produce_variety_in_the_ple'], produce_type=api_data['produce_commodity_in_the_ple'], price_per_pack=api_data['produce_cost_per_pack_in_the_ple'], pack_size=api_data['produce_pack_type_from_the_supplier_in_the_ple'])
+
+        system_prompt = system_prompt.format(**api_data)
 
         st.write(initial_text)
 
@@ -113,7 +135,7 @@ def main():
                 messages.append(json_obj)
 
         #generate OpenAI response
-        messages, count = ideator(messages, lead_dict_info)
+        messages, count = ideator(messages, api_data)
 
         #append to database
         with open('database.jsonl', 'a') as f:
