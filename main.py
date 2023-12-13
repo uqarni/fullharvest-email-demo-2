@@ -96,7 +96,7 @@ def main():
         bot_info = data[1][0]
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
-        initial_text =initial_text.format(grade=api_data['produce_grade_from_the_supplier_in_the_ple'], growing_method =api_data['produce_growing_method_from_the_supplier_in_the_ple'], variety=api_data['produce_variety_in_the_ple'], produce_type=api_data['produce_commodity_in_the_ple'], price_per_pack=api_data['produce_cost_per_pack_in_the_ple'], pack_size=api_data['produce_pack_type_from_the_supplier_in_the_ple'],location_variable =api_data['supplier_city_where_the_produce_is_shipping_from'])
+        initial_text =initial_text.format(grade=api_data['produce_grade_from_the_supplier_in_the_ple'], growing_method =api_data['produce_growing_method_from_the_supplier_in_the_ple'], variety=api_data['produce_variety_in_the_ple'], produce_type=api_data['produce_commodity_in_the_ple'], price_per_pack=api_data['produce_cost_per_pack_in_the_ple'], pack_size=api_data['produce_pack_type_from_the_supplier_in_the_ple'],location_variable =api_data['supplier_city_where_the_produce_is_shipping_from'],produce_price_per_pack_type_from_the_supplier = api_data['produce_price_per_pack_type_from_the_supplier'])
 
         system_prompt = system_prompt.format(**api_data)
 
