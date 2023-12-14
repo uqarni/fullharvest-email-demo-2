@@ -56,7 +56,6 @@ def main():
     produce_grade_from_the_supplier_in_the_ple = st.text_input('Produce grade from the supplier in the PLE',value = 'A+')
     produce_sizing_from_the_supplier_in_the_ple = st.text_input('Produce sizing from the supplier in the PLE ',value = 'Large')
     produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple = st.text_input('Produce pack amount per pack type from the supplier',value = 4)
-    produce_price_per_pack_type_from_the_supplier = st.text_input('Produce price per pack type from the supplier',value = 4)
     produce_description = st.text_input('Produce description',value = "Best Apple in the world")
     supplier_city_where_the_produce_is_shipping_from = st.text_input('Supplier city where the produce is shipping from',value = "Denver, CO")
 
@@ -86,8 +85,7 @@ def main():
             "produce_sizing_from_the_supplier_in_the_ple": produce_sizing_from_the_supplier_in_the_ple,
             "produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple": produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple,
             "produce_description": produce_description,
-            "supplier_city_where_the_produce_is_shipping_from" :supplier_city_where_the_produce_is_shipping_from,
-            "produce_price_per_pack_type_from_the_supplier" :produce_price_per_pack_type_from_the_supplier
+            "supplier_city_where_the_produce_is_shipping_from" :supplier_city_where_the_produce_is_shipping_from
   
         }
 
@@ -96,7 +94,7 @@ def main():
         bot_info = data[1][0]
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
-        initial_text =initial_text.format(grade=api_data['produce_grade_from_the_supplier_in_the_ple'], growing_method =api_data['produce_growing_method_from_the_supplier_in_the_ple'], variety=api_data['produce_variety_in_the_ple'], produce_type=api_data['produce_commodity_in_the_ple'], price_per_pack=api_data['produce_cost_per_pack_in_the_ple'], pack_size=api_data['produce_pack_type_from_the_supplier_in_the_ple'],location_variable =api_data['supplier_city_where_the_produce_is_shipping_from'],produce_price_per_pack_type_from_the_supplier = api_data['produce_price_per_pack_type_from_the_supplier'])
+        initial_text =initial_text.format(grade=api_data['produce_grade_from_the_supplier_in_the_ple'], growing_method =api_data['produce_growing_method_from_the_supplier_in_the_ple'], variety=api_data['produce_variety_in_the_ple'], produce_type=api_data['produce_commodity_in_the_ple'], price_per_pack=api_data['produce_cost_per_pack_in_the_ple'], pack_size=api_data['produce_pack_type_from_the_supplier_in_the_ple'],location_variable =api_data['supplier_city_where_the_produce_is_shipping_from'])
 
         system_prompt = system_prompt.format(**api_data)
 
