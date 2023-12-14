@@ -54,7 +54,6 @@ def main():
     priority_listing_purchase_status = st.text_input('Priority Listing Purchase Status',value = 'not purchased')
     priority_listing_has_pictures = st.text_input('Supplier city where the produce is shipping from',value = 'no')
     produce_grade_from_the_supplier_in_the_ple = st.text_input('Produce grade from the supplier in the PLE',value = 'A+')
-    produce_sizing_from_the_supplier_in_the_ple = st.text_input('Produce sizing from the supplier in the PLE ',value = 'Large')
     produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple = st.text_input('Produce pack amount per pack type from the supplier',value = 4)
     produce_description = st.text_input('Produce description',value = "Best Apple in the world")
     supplier_city_where_the_produce_is_shipping_from = st.text_input('Supplier city where the produce is shipping from',value = "Denver, CO")
@@ -82,7 +81,6 @@ def main():
             "priority_listing_purchase_status": priority_listing_purchase_status,
             "priority_listing_has_pictures": priority_listing_has_pictures,
             "produce_grade_from_the_supplier_in_the_ple":produce_grade_from_the_supplier_in_the_ple,
-            "produce_sizing_from_the_supplier_in_the_ple": produce_sizing_from_the_supplier_in_the_ple,
             "produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple": produce_pack_amount_per_pack_type_from_the_supplier_in_the_ple,
             "produce_description": produce_description,
             "supplier_city_where_the_produce_is_shipping_from" :supplier_city_where_the_produce_is_shipping_from
