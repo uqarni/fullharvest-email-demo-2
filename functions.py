@@ -30,6 +30,21 @@ def find_txt_examples(query, k=8):
        i+=1
     return examples
 
+def format_links(text):
+    # Regular expression to identify URLs
+    # Matches URLs starting with http://, https://, or www., and simple .com URLs
+    url_regex = r'(https?://\S+|www\.\S+|\b\S+\.com\b)'
+    
+    # Function to replace each URL with Markdown link format
+    def replace_with_link(match):
+        url = match.group(0)
+        # Add http:// if the URL starts with www. or ends with .com and does not start with http:// or https://
+        if url.startswith('www.') or (url.endswith('.com') and not (url.startswith('http://') or url.startswith('https://'))):
+            url = 'http://' + url
+        return f"[Link]({url})"
+
+    # Replace all found URLs in the text
+    return re.sub(url_regex, replace_with_link, text)
 
 #generate openai response; returns messages with openai response
 def ideator(messages, lead_dict_info):
@@ -62,9 +77,16 @@ def ideator(messages, lead_dict_info):
           temperature = 0
         )
         response = result["choices"][0]["message"]["content"]
-        #print('response:')
-        #print(response)
-        #print('\n\n')
+        newline = "  \n"
+        response = response.replace("\n", newline)
+        response = response.replace("Best, Harvey", "")
+        response = response.replace("Best,  \nHarvey", "")
+        response = response.replace("Cheers,  \nHarvey", "")
+        response = response.replace("Cheers, Harvey", "")
+        response = response + newline + newline + 'Best,' + newline + 'Harvey'
+        print('response:')
+        print(response)
+        print('\n\n')
         break
       except Exception as e: 
         error_message = f"Attempt {i + 1} failed: {e}"
@@ -73,25 +95,25 @@ def ideator(messages, lead_dict_info):
           time.sleep(5)  # wait for 5 seconds before the next attempt
   
     def split_sms(message):
+        #not splitting it for now so just return it as a list
         import re
-        newline = "\n"
-        message = message.replace("\n", newline)
+        message = [message]
+        for m in message:
+           print('###')
+           print(m)
+           print('###')
+        return message
 
-        message = message + newline + newline + 'Best,' + newline + 'Harvey'
-        return [message]
-
-    response = add_space_after_url(response)
-    split_response = split_sms(response)
-    count = len(split_response)
-    for section in split_response:
-        section = add_space_after_url(section)
-        section = {
+    response = format_links(response)
+    #split_response = split_sms(response)
+    #count = len(split_response)
+    section = {
            "role": "assistant", 
-           "content": section
+           "content": response
            }
-        messages.append(section)
+    messages.append(section)
     
-    return messages, count
+    return messages, 1
   
 
 def add_space_after_url(s):

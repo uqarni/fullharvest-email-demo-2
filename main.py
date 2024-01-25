@@ -148,7 +148,7 @@ def main():
         for message in messages[1:]:
             if 'This is a secret internal thought' not in str(message):
                 string = string + message["role"] + ": " + message["content"] + "\n\n"
-        st.write(string)
+        st.markdown(string)
         
 
 if __name__ == '__main__':
