@@ -80,6 +80,8 @@ def ideator(messages, lead_dict_info):
         newline = "  \n"
         response = response.replace("Best, Harvey", "")
         response = response.replace("Best,\nHarvey", "")
+        response = response.replace("Best,\n\nHarvey", "")
+        response = response.replace("Best,  \nHarvey", "")
         response = response.replace("Cheers,\nHarvey", "")
         response = response.replace("Cheers,  \nHarvey", "")
         response = response.replace("Cheers,\n\nHarvey", "")
