@@ -88,7 +88,7 @@ def main():
         }
 
     if st.button('Click to Start or Restart'):
-        data, count = supabase.table("bots_dev").select("*").eq("id", 'outbound_harvey').execute() 
+        data, count = supabase.table("bots_dev").select("*").eq("id", 'outbound_harvey_email').execute() 
         bot_info = data[1][0]
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
@@ -111,7 +111,7 @@ def main():
 
 
     # Create a text input for the user to enter their message and append it to messages
-    userresponse = st.text_input("Enter your message")
+    userresponse = st.text_area("Enter your message", height = 300)
     
 
     # Create a button to submit the user's message
