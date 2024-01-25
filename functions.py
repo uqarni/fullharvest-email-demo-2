@@ -74,8 +74,9 @@ def ideator(messages, lead_dict_info):
   
     def split_sms(message):
         import re
-        message = message.replace("\n", "  \n")
-        newline = "  \n"
+        newline = "\n"
+        message = message.replace("\n", newline)
+
         message = message + newline + newline + 'Best,' + newline + 'Harvey'
         return [message]
 
