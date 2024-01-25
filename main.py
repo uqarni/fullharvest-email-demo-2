@@ -16,15 +16,8 @@ supabase: Client = create_client(urL, key)
 
 def main():
     message = """
-            The following bot is how Harvey is going to correspond with buyers who receive and click on the Priority Listings. The objective is to find out what the buyers need if they need anything different than what’s on the listing, and then schedule a call with their account executive to see if Full Harvest can help them.
-
-            We need your help in identifying how Harvey can correspond better. To do that, we need example conversations.
-
-            Here’s a video on how to give feedback to Harvey.
-            [Harvey Feedback Instructions Video](https://www.loom.com/share/5577b742cecd4d82939697e17bc7c617)
-
-            Here’s the google doc you can leave your feedback in:
-            [Feedback Google Doc](https://docs.google.com/document/d/147Bzbi1zbcdN4kmuv2enOF6RcROeLpCI5v12fx2oJ_w/edit)
+            This is a testing site for Outbound Harvey email. Please share all feedback with screenshots and suggested changes directly with Mert.
+            Reminder: one person using the site at a time. 
             """
 
 
