@@ -74,7 +74,9 @@ def ideator(messages, lead_dict_info):
   
     def split_sms(message):
         import re
-        message = message + '\n\nBest,\nHarvey'
+        message = message.replace("\n", "  \n")
+        newline = "  \n"
+        message = message + newline + newline + 'Best,' + newline + 'Harvey'
         return [message]
 
     response = add_space_after_url(response)
