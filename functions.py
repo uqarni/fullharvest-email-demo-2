@@ -78,11 +78,13 @@ def ideator(messages, lead_dict_info):
         )
         response = result["choices"][0]["message"]["content"]
         newline = "  \n"
-        response = response.replace("\n", newline)
         response = response.replace("Best, Harvey", "")
-        response = response.replace("Best,  \nHarvey", "")
+        response = response.replace("Best,\nHarvey", "")
+        response = response.replace("Cheers,\nHarvey", "")
         response = response.replace("Cheers,  \nHarvey", "")
+        response = response.replace("Cheers,\n\nHarvey", "")
         response = response.replace("Cheers, Harvey", "")
+        response = response.replace("\n", newline)
         response = response + newline + newline + 'Best,' + newline + 'Harvey'
         print('response:')
         print(response)
