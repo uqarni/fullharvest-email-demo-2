@@ -12,6 +12,51 @@ from langchain.vectorstores import FAISS
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+def split_sms(message):
+    # Use regular expressions to split the string at ., !, or ? followed by a space or newline
+    sentences = re.split('(?<=[.!?]) (?=\\S)|(?<=[.!?])\n', message.strip())
+    # Strip leading and trailing whitespace from each sentence
+    sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+
+    # Compute the total length of all sentences
+    total_length = sum(len(sentence) for sentence in sentences)
+
+    # Split the sentences into two parts such that the difference in their total lengths is minimized
+    part1 = []
+    part2 = []
+    part1_length = 0
+    i = 0
+    while i < len(sentences) and part1_length + len(sentences[i]) <= total_length / 2:
+        part1.append(sentences[i])
+        part1_length += len(sentences[i])
+        i += 1
+
+    part2 = sentences[i:]
+
+    # Join the sentences in each part back into strings
+    #if part1 is empty, just return part2
+    if len(part1) == 0:
+        strings = [" ".join(part2)]
+    else:
+        #half the time, include both parts in two strings
+        if random.random() < 0.5:
+            strings = [" ".join(part1), " ".join(part2)]
+        else:
+            #add both part1 and part2 into one string
+            strings = [" ".join(part1 + part2)]
+
+    return strings
+
+def add_space_after_url(s):
+    words = s.split()
+    for i, word in enumerate(words):
+        if word.startswith('http://') or word.startswith('https://'):
+            if word[-1] in '.,!?;:':
+                words[i] = word[:-1] + ' ' + word[-1] + ' '
+            else:
+                words[i] = word + ' '
+    return ' '.join(words)
+
 def find_txt_examples(query, k=8):
     loader = TextLoader("sops.txt")
     documents = loader.load()
@@ -97,18 +142,8 @@ def ideator(messages, lead_dict_info):
         #print(error_message)
         if i < 4:  # we don't want to wait after the last try
           time.sleep(5)  # wait for 5 seconds before the next attempt
-  
-    def split_sms(message):
-        #not splitting it for now so just return it as a list
-        import re
-        message = [message]
-        for m in message:
-           print('###')
-           print(m)
-           print('###')
-        return message
 
-    response = format_links(response)
+    response = add_space_after_url(response)
     split_response = split_sms(response)
     count = len(split_response)
     section = {
@@ -118,18 +153,6 @@ def ideator(messages, lead_dict_info):
     messages.append(section)
     
     return messages, 1
-  
-
-def add_space_after_url(s):
-    words = s.split()
-    for i, word in enumerate(words):
-        if word.startswith('http://') or word.startswith('https://'):
-            if word[-1] in '.,!?;:':
-                words[i] = word[:-1] + ' ' + word[-1] + ' '
-            else:
-                words[i] = word + ' '
-    return ' '.join(words)
-
 
 def create_produce_link_url(buyer_or_supplier, inputs):
   to_append = ''
