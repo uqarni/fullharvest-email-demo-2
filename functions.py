@@ -109,8 +109,8 @@ def ideator(messages, lead_dict_info):
         return message
 
     response = format_links(response)
-    #split_response = split_sms(response)
-    #count = len(split_response)
+    split_response = split_sms(response)
+    count = len(split_response)
     section = {
            "role": "assistant", 
            "content": response
