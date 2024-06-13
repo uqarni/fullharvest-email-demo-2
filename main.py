@@ -84,7 +84,7 @@ def main():
         }
 
     if st.button('Click to Start or Restart'):
-        data, count = supabase.table("bots_dev").select("*").eq("id", 'outbound_harvey_email').execute() 
+        data, count = supabase.table("bots_dev").select("*").eq("id", 'outbound_harvey').execute() 
         bot_info = data[1][0]
         system_prompt = bot_info['system_prompt']  
         initial_text = bot_info['initial_text'] 
