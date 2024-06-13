@@ -105,7 +105,6 @@ def main():
             f.write(json.dumps(messages[0])+'\n')
             f.write(json.dumps(messages[1])+'\n')
 
-
     # Create a text input for the user to enter their message and append it to messages
     userresponse = st.text_area("Enter your message", height = 300)
     
