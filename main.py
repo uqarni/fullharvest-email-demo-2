@@ -19,7 +19,7 @@ supabase: Client = create_client(urL, key)
 
 def main():
     message = """
-            This is a testing site for Outbound Harvey email. Please share all feedback with screenshots and suggested changes directly with Mert.
+            This is a testing site for Outbound Harvey SMS. Please share all feedback with screenshots and suggested changes directly with Mert.
             Reminder: one person using the site at a time. 
             """
 
