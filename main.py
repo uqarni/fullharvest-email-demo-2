@@ -4,6 +4,9 @@ import json
 import os
 from datetime import datetime
 from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 #connect to supabase database
 urL: str = os.environ.get("SUPABASE_URL")

@@ -1,6 +1,6 @@
 openai==0.28.1
 streamlit
 supabase
-langchain
+langchain-community
 tiktoken
 faiss-cpu

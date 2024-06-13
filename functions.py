@@ -71,23 +71,23 @@ def ideator(messages, lead_dict_info):
         op.api_key = key
     
         result = op.ChatCompletion.create(
-          model="gpt-4",
+          model="gpt-4o",
           messages= messages,
           max_tokens = 500,
           temperature = 0
         )
         response = result["choices"][0]["message"]["content"]
-        newline = "  \n"
-        response = response.replace("Best, Harvey", "")
-        response = response.replace("Best,\nHarvey", "")
-        response = response.replace("Best,\n\nHarvey", "")
-        response = response.replace("Best,  \nHarvey", "")
-        response = response.replace("Cheers,\nHarvey", "")
-        response = response.replace("Cheers,  \nHarvey", "")
-        response = response.replace("Cheers,\n\nHarvey", "")
-        response = response.replace("Cheers, Harvey", "")
-        response = response.replace("\n", newline)
-        response = response + newline + newline + 'Best,' + newline + 'Harvey'
+        # newline = "  \n"
+        # response = response.replace("Best, Harvey", "")
+        # response = response.replace("Best,\nHarvey", "")
+        # response = response.replace("Best,\n\nHarvey", "")
+        # response = response.replace("Best,  \nHarvey", "")
+        # response = response.replace("Cheers,\nHarvey", "")
+        # response = response.replace("Cheers,  \nHarvey", "")
+        # response = response.replace("Cheers,\n\nHarvey", "")
+        # response = response.replace("Cheers, Harvey", "")
+        # response = response.replace("\n", newline)
+        # response = response + newline + newline + 'Best,' + newline + 'Harvey'
         print('response:')
         print(response)
         print('\n\n')
